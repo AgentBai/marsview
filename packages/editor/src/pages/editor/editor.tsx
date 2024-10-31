@@ -58,35 +58,45 @@ const Editor = () => {
   useEffect(() => {
     if (!id) return;
     setLoaded(false);
-    getPageDetail(parseInt(id)).then((res) => {
-      let pageData: any = {};
-      try {
-        pageData = JSON.parse(res.page_data || '{}');
-      } catch (error) {
-        console.error(error);
-        console.info('【json数据】', res.page_data);
-        message.error('页面数据格式错误，请检查');
-      }
-      savePageInfo({
-        config: PageConfig.config,
-        events: PageConfig.events,
-        ...pageData,
-        pageId: res.id,
-        pageName: res.name,
-        remark: res.remark,
-        is_public: res.is_public,
-        is_edit: res.is_edit,
-        preview_img: res.preview_img,
-        stg_publish_id: res.stg_publish_id,
-        pre_publish_id: res.pre_publish_id,
-        prd_publish_id: res.prd_publish_id,
-        stg_state: res.stg_state,
-        pre_state: res.pre_state,
-        prd_state: res.prd_state,
-        user_id: res.user_id,
-      });
-      setLoaded(true);
+    const res = {
+      id: 2886,
+      name: 'XDM回答',
+      user_id: 547,
+      user_name: 'zxlin',
+      page_data: '',
+      remark: '',
+      is_public: 1,
+      is_edit: 1,
+      preview_img: null,
+      stg_publish_id: 0,
+      pre_publish_id: 0,
+      prd_publish_id: 0,
+      stg_state: 1,
+      pre_state: 1,
+      prd_state: 1,
+      project_id: 0,
+      updated_at: '2024-10-31 10:39:32',
+      created_at: '2024-10-31 10:39:32',
+    };
+    savePageInfo({
+      config: PageConfig.config,
+      events: PageConfig.events,
+      ...res,
+      pageId: res.id,
+      pageName: res.name,
+      remark: res.remark,
+      is_public: res.is_public,
+      is_edit: res.is_edit,
+      preview_img: res.preview_img,
+      stg_publish_id: res.stg_publish_id,
+      pre_publish_id: res.pre_publish_id,
+      prd_publish_id: res.prd_publish_id,
+      stg_state: res.stg_state,
+      pre_state: res.pre_state,
+      prd_state: res.prd_state,
+      user_id: res.user_id,
     });
+    setLoaded(true);
     return () => {
       clearPageInfo();
       setHoverTarget(null);

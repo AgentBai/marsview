@@ -33,111 +33,25 @@ function ErrorBoundary() {
 }
 export const router = [
   {
-    path: '/',
-    element: lazyLoad(React.lazy(() => import('@/pages/welcome/Welcome'))),
-  },
-  {
-    path: '/login',
-    element: lazyLoad(React.lazy(() => import('@/pages/login/Login'))),
-  },
-  {
-    path: '/',
-    loader: AuthLoader,
-    element: <Root />,
-    errorElement: <ErrorBoundary />,
+    path: '/editor/:id',
+    element: lazyLoad(
+      React.lazy(() => import('@/layout/EditLayout')),
+      true,
+    ),
     children: [
       {
-        path: '/projects',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/ProjectList'))),
-      },
-      {
-        path: '/pages',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/PageList'))),
-      },
-      {
-        path: '/libs',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/LibList'))),
-      },
-      {
-        path: '/templates',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/Template'))),
-      },
-      {
-        path: '/workflows',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/workflow/WorkFlowList'))),
-      },
-      {
-        path: '/workflow/:id',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/workflow/Design'))),
-      },
-      {
-        path: '/lib/:id',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/lib/LibEditor'))),
-      },
-      {
-        path: '/editor/:id',
+        path: '/editor/:id/edit',
         element: lazyLoad(
-          React.lazy(() => import('@/layout/EditLayout')),
+          React.lazy(() => import('@/pages/editor/editor')),
           true,
         ),
-        children: [
-          {
-            path: '/editor/:id/edit',
-            element: lazyLoad(
-              React.lazy(() => import('@/pages/editor/editor')),
-              true,
-            ),
-          },
-          {
-            path: '/editor/:id/template',
-            element: lazyLoad(
-              React.lazy(() => import('@/pages/editor/editor')),
-              true,
-            ),
-          },
-        ],
       },
       {
-        path: '/editor/:id/publishHistory',
-        element: lazyLoad(React.lazy(() => import('@/pages/publishHistory'))),
-      },
-      {
-        path: '/project/:id',
-        element: lazyLoad(React.lazy(() => import('@/pages/admin/admin'))),
-        children: [
-          {
-            path: '/project/:id/config',
-            element: lazyLoad(React.lazy(() => import('@/pages/admin/config/index'))),
-          },
-          {
-            path: '/project/:id/menu',
-            element: lazyLoad(React.lazy(() => import('@/pages/admin/menu/index'))),
-          },
-          {
-            path: '/project/:id/role',
-            element: lazyLoad(React.lazy(() => import('@/pages/admin/role/index'))),
-          },
-          {
-            path: '/project/:id/user',
-            element: lazyLoad(React.lazy(() => import('@/pages/admin/user/index'))),
-          },
-        ],
-      },
-      {
-        path: '/cloud',
-        element: lazyLoad(React.lazy(() => import('@/pages/home/cloud/ImgCloud'))),
-      },
-      {
-        path: '*',
-        element: <Navigate to="/404" />,
-      },
-      {
-        path: '/404',
-        element: lazyLoad(React.lazy(() => import('@/pages/404'))),
-      },
-      {
-        path: '/403',
-        element: lazyLoad(React.lazy(() => import('@/pages/403'))),
+        path: '/editor/:id/template',
+        element: lazyLoad(
+          React.lazy(() => import('@/pages/editor/editor')),
+          true,
+        ),
       },
     ],
   },
